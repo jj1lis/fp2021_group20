@@ -62,8 +62,8 @@ void img_fillcircle(struct color c, double x, double y, double r){
     // それぞれ円領域のx座標、y座標のうち最小値と最大値
     int imin = (int)(x - r - 1);
     int imax = (int)(x + r + 1);
-    int imin = (int)(y - r - 1);
-    int imax = (int)(y + r + 1);
+    int jmin = (int)(y - r - 1);
+    int jmax = (int)(y + r + 1);
 
     int i, j;
 
@@ -77,12 +77,20 @@ void img_fillcircle(struct color c, double x, double y, double r){
     }
 }
 
-void img_fillrectangle(struct color c, int x, int y, int w, int h){
+void img_fillrectangle(struct color c, int x1, int y1, int x2, int y2){
+    int min(int a, int b){
+        return (a > b ? b : a);
+    }
+
+    int max(int a, int b){
+        return (a > b ? a : b);
+    }
+
     // それぞれ矩形領域のx座標、y座標のうち最小値と最大値
-    int imin = x - (w / 2);
-    int imax = x + (w / 2);
-    int jmin = y - (h / 2);
-    int jmax = y + (h / 2);
+    int imin = min(x1, x2);
+    int imax = max(x1, x2);
+    int jmin = min(y1, y2);
+    int jmax = max(y1, y2);
 
     int i, j;
 
