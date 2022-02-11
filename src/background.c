@@ -115,5 +115,4 @@ void background(int t){
     makebuild(c1, 13, 20, 123, 21);
     makebuild(c2, 15, 45, 21, 30);
     shootingstar(100+t, 198, t);
-    img_write();
 }
