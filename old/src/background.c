@@ -1,26 +1,15 @@
+#include <stdlib.h>
 #include <math.h>
 #include "background.h"
 #include "img.h"
+#include "util.h"
 
-typedef struct color Color;
-
-const Color NIGHT = {27, 34, 57};
-const Color NIGHT_DARK = {23, 20, 41};
-const Color NIGHT_MIDDLEDARK = {25, 28, 48};
-const Color GRAY = {46, 45, 59};
-const Color LIGHT = {210, 207, 202};
-
-const int HORIZON_Y = 60;
+// 地上の街明かりの数
+#define GROUND_LIGHT_NUM 200
 
 int WARNING_LIGHT[2];
 
-int min(int a, int b){
-    return (a > b ? b : a);
-}
-
-int max(int a, int b){
-    return (a > b ? a : b);
-}
+Point ground_light[GROUND_LIGHT_NUM];
 
 // 水平線の夜景を描画
 void dotHorizon_5(int begin, int hnum1, int hnum2, int hnum3, int hnum4, int hnum5){
@@ -109,8 +98,15 @@ int dotTower(int x, int y){
     return y + height;
 }
 
+// 初期化
+void initialize(){
+    // 地上の街明かりの位置を設定
+    for(int i = 0; i < GROUND_LIGHT_NUM; i++)
+        ground_light[i] = toPoint(rand() % 300, rand() % HORIZON_Y);
+}
+
 // 背景の変化しない部分
-void initback(){
+void staticback(){
     //ベタ塗り
     img_fillrectangle(NIGHT, 0, 0, WIDTH, HEIGHT);
     //img_fillrectangle(NIGHT_MIDDLEDARK, 0, 0, WIDTH, HORIZON_Y);
@@ -122,6 +118,10 @@ void initback(){
     dotHorizon_5(150, 1, 2, 1, 4, 5);
     dotHorizon_5(200, 2, 3, 3, 4, 1);
     dotHorizon_5(250, 5, 4, 3, 2, 1);
+
+    //地上の街明かり
+    for(int i = 0; i < GROUND_LIGHT_NUM; i++)
+        img_putpixel(LIGHT, ground_light[i].x, ground_light[i].y);
 
     // ビルを生やす
     dotBuilding(0, 20, 30, 55, 3, 3);
@@ -138,8 +138,12 @@ void initback(){
 }
 
 void background(int time){
-    initback();
+    if(time == 0)
+        initialize();
 
-    Color warninglight = {max(23, (int)(255 * (sin(2 * 3.14 * (double)(time - 20) / 80)))), 20, 41}; // NIGHT_DARKの上塗り
-    img_putpixel(warninglight, WARNING_LIGHT[0], WARNING_LIGHT[1]);
+    staticback();
+
+    Color warninglight = {max(23, (int)(255 * (sin(2 * 3.14 * (double)(time - 20) / 100)))), 20, 41}; // NIGHT_DARKの上塗り
+    //img_putpixel(warninglight, WARNING_LIGHT[0], WARNING_LIGHT[1]);
+    img_fillcircle(warninglight, WARNING_LIGHT[0], WARNING_LIGHT[1], 1);
 }
