@@ -125,7 +125,7 @@ void dotFirework(Color innercolor, Color outercolor, int _time, int start, int c
 
         for(int i = 0; i < height_explosion / 2; i ++){
             if(head_y - i > HORIZON)
-                img_putpixel(addTransparency(FLASH, SKY, linerAttenuation(i, height_explosion / 2) * suddenAttenuation(time, time_explosion)), axis + snake(i), head_y - i);
+                img_putpixel(addTransparency(FLASH, SKY, linerAttenuation(i, height_explosion / 2) * suddenAttenuation(time, time_explosion)), axis + snake(head_y - i), head_y - i);
         }
 
     }else{
