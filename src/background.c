@@ -9,28 +9,35 @@ struct color white = {255, 255, 255};
 int t0 = 0;
 int x0 = 0;
 bool flag=true;
-
-//星をランダムで生成し,空を描画
+int starx[30];
+int stary[30];
+//空を描画
 void makesky(int t){
     int w, h;
     w = 300;
     h = 170;
+    //t==0のときランダムで星の位置を決定->グローバル変数に格納。
     if(t==0){
-        for (int i = 0; i < w; ++i)
-        {
-            for (int j = 0; j < h; ++j)
-            {
-                img_putpixel(skycol, i, j + 30);
-            }
-        }
         for (int i = 0; i < 24; ++i)
         {
-            int numy = rand() % 30 + 1;
-            int numx = rand() % 300 + 1;
-            img_putpixel(white, numx, numy+170);
+            stary[i] = rand() % 30 + 1;
+            starx[i] = rand() % 300 + 1;
+
         }
     }
-
+    //空の描画
+    for (int i = 0; i < w; ++i)
+    {
+        for (int j = 0; j < h; ++j)
+        {
+            img_putpixel(skycol, i, j + 30);
+        }
+    }
+    //星の描画
+    for (int i = 0; i < 24; ++i)
+    {
+        img_putpixel(white, starx[i], stary[i]+170);
+    }
 }
 //地面を描画
 void makeground(void){
