@@ -16,6 +16,8 @@ typedef struct{
 double radius1[100];
 double radius2[100];
 double radius3[100];
+double radius4[100];
+double radius5[100];
 
 // 範囲の構造体
 // 必ずtoArea (コンストラクタ代わり) を使って作る
@@ -149,11 +151,17 @@ void firework(int time){
     Color blue = {100, 100, 255};
 
     Area firework1 = toArea(toPoint(15, HORIZON), toPoint(75, 150));
-    dotFirework(red, FLASH, time, 5, 75, firework1, radius1);
+    dotFirework(red, FLASH, time, 5, 77, firework1, radius1);
 
     Area firework2 = toArea(toPoint(120, HORIZON), toPoint(180, 150));
-    dotFirework(green, FLASH, time, 0, 70, firework2, radius2);
+    dotFirework(green, FLASH, time, 0, 83, firework2, radius2);
 
     Area firework3 = toArea(toPoint(225, HORIZON), toPoint(285, 150));
-    dotFirework(blue, FLASH, time, 10, 80, firework3, radius3);
+    dotFirework(blue, FLASH, time, 10, 75, firework3, radius3);
+
+    Area firework4 = toArea(toPoint(85, HORIZON), toPoint(115, 130));
+    dotFirework(FLASH, FLASH, time, 14, 74, firework4, radius4);
+
+    Area firework5 = toArea(toPoint(185, HORIZON), toPoint(215, 130));
+    dotFirework(FLASH, FLASH, time, 3, 80, firework5, radius5);
 }
