@@ -1,3 +1,5 @@
+#pragma once
+
 #define WIDTH 300   // 映像の幅
 #define HEIGHT 200  // 映像の高さ
 
