@@ -82,15 +82,6 @@ double suddenAttenuation(int t, int range){
     }
 }
 
-void shoot(int time, int cycle, Area area){
-    
-}
-
-void explode(Color innercolor, Color outercolor, int time, int cycle, Area area){
-    
-}
-
-
 void dotFirework(Color innercolor, Color outercolor, int _time, int start, int cycle, Area area, double* radius){
     int time = _time - start;
     if(_time < start || time >= cycle)
